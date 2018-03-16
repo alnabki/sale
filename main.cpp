@@ -7,7 +7,15 @@
 #include<string>
 #include<list>
 using namespace std;
-
+class login {
+  string  username;
+  string  password;
+  login (){
+   cout <<"enter you name and password" <<endl;
+   cout <<" name=\t"<<username<<endl;
+   cout <<" password=\t "<<endl;
+  }
+};
 class customer {
 public :
    string ID ;
@@ -423,6 +431,8 @@ void show_sale_byname(string name){
                  cout <<"*******************************************************************************"<<endl;
                  cout <<"all your purchases =\t"<<sum<<endl;
                  cout <<"*******************************************************************************"<<endl;
+}
+bool verification(login){
 }
 int main(){
 
