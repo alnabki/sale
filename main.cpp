@@ -486,6 +486,7 @@ void show_sale_byname(string name){
 }
 bool verification(string name){
     account acc;
+    customer cust;
     string password;
     DB_connection db;
     bool login=false;
@@ -520,7 +521,15 @@ bool verification(string name){
             cout <<" password=\t ";
             cin>>acc.password;
             cout<<"*****************************************"<<endl;
+            cust.name=name;
+           // cust.add(cust);
+            cout<<"enter the age=\t";
+            cin>>cust.age;
+            cout<<"enter the phone=\t";
+            cin>>cust.phone;
+            db.cust_insert(cust);
             db.account_insert(acc );
+            cust=db.cust_selectbyname(name);
             login=true;
     }
 
@@ -531,17 +540,15 @@ bool verification(string name){
 int main(){
 string name;
 bool login=true;;
-//cout <<"enter you name\t";
-//cin >>name;
-verification(name);
-if (login==true){
+//verification(name);
+//if (login==true){
 
     product pro;
     order_t ord;
     account acc;
     DB_connection db;
     bool j = false;
-    string name,idd,id;
+    string idd,id;
    int menu_choice, menu_choice_admin,menu_ch,t;
     char y;
     customer cust;
@@ -613,20 +620,21 @@ if (login==true){
            break;
             }
          case 2:{//  for customer
-                 string name;
-                 cout<< "enter your name ";
-                 cin>> name;
-                 cust=db.cust_selectbyname(name);
-                 if (!cust.ID.empty()){
-                      goto efter_case1;
-                 }
-                 else{
-                     cust.name=name;
-                     cust.add(cust);
-                     db.cust_insert(cust);
-                     goto efter_case1;
-                 }
-                efter_case1:{
+                string name;
+                 verification(name);
+                if (login==true){
+                 //string name;
+                 //cout<< "enter your name ";
+                // cin>> name;
+                 //cust=db.cust_selectbyname(name);
+                // if (login==true){
+                  //    goto efter_case1;
+                // }
+                 //else{
+
+                 //    goto efter_case1;
+                 //}
+               // efter_case1:{
                         bool goback1=false;
                          cust.show(cust);
                     do{
@@ -690,7 +698,8 @@ if (login==true){
                              }
                              }
                         }while (goback1=true);
-                }
+               // }
+         }
          }
          default :{
                 cout << "You have entered an invalid menu choice.\n"<<endl;
@@ -704,7 +713,7 @@ if (login==true){
          system("cls") ;
      }
          } while (goback=true);
-         }
+
 
       return 0;
       }
