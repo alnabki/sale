@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2018 at 09:05 AM
+-- Generation Time: Mar 16, 2018 at 05:10 PM
 -- Server version: 10.1.30-MariaDB
--- PHP Version: 5.6.33
+-- PHP Version: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,50 @@ SET time_zone = "+00:00";
 --
 -- Database: `sale_products`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account`
+--
+
+CREATE TABLE `account` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `account`
+--
+
+INSERT INTO `account` (`id`, `username`, `password`) VALUES
+(1, 'mohamad', '123'),
+(2, '', ''),
+(3, '', ''),
+(4, '', ''),
+(5, '', ''),
+(6, 'rola', '123'),
+(7, 'tamer', '1234'),
+(8, 'jasmin', '123'),
+(9, 'mazen', '123'),
+(10, 'taher', '1234'),
+(11, 'maher', '123'),
+(12, 'maggi', '123'),
+(13, 'jasss', '123'),
+(14, 'nnn', '22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account_admin`
+--
+
+CREATE TABLE `account_admin` (
+  `id` int(11) NOT NULL,
+  `admin_name` varchar(50) NOT NULL,
+  `admin_pass` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -64,7 +108,12 @@ INSERT INTO `customer` (`ID`, `name`, `age`, `phone`) VALUES
 (22, 'qewfwe', 22, 444),
 (23, 'yasen', 22, 1112223),
 (24, '2', 0, 2222),
-(25, 'ayman', 45, 777);
+(25, 'ayman', 45, 777),
+(26, 'taher', 22, 223333333),
+(27, 'maher', 22, 3444),
+(28, 'maggi', 23, 22222222),
+(29, 'jasss', 12, 111111),
+(30, 'nnn', 12, 11111);
 
 -- --------------------------------------------------------
 
@@ -89,7 +138,10 @@ INSERT INTO `order_t` (`ID`, `cust_ID`, `prod_ID`) VALUES
 (6, 25, 9),
 (7, 3, 10),
 (8, 3, 10),
-(9, 3, 5);
+(9, 3, 5),
+(10, 1, 2),
+(12, 1, 11),
+(13, 20, 3);
 
 -- --------------------------------------------------------
 
@@ -110,15 +162,14 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`ID`, `product_name`, `price`, `quantity`) VALUES
 (1, '', 0, 0),
-(2, 'camera', 344, 29),
-(3, 'car', 230000, 4),
+(2, 'camera', 344, 28),
+(3, 'car', 230000, 3),
 (5, 'laptop', 2000, 1),
-(6, 'headphone', 40, 44),
 (7, 'test', 88, 0),
 (8, 'test2', 22, 333),
 (9, 'qq', 22, 1),
 (10, 'cow', 10000, 8),
-(11, 'car', 1222, 3),
+(11, 'car', 1222, 2),
 (12, 'www', 0, 0),
 (13, 'rrr', 333, 3),
 (14, 'efd', 0, 0),
@@ -129,11 +180,28 @@ INSERT INTO `products` (`ID`, `product_name`, `price`, `quantity`) VALUES
 (19, 'uuu', 676, 99),
 (20, 'trtr', 555, 33),
 (21, 'vaat', 22, 44),
-(22, 'ee', 22, 3);
+(22, 'ee', 22, 3),
+(23, 'camera', 9998, 55),
+(24, 'tre', 88, 9),
+(25, 'rrr', 23, 44),
+(26, 'yashhh', 55, 9),
+(27, 'eee', 22, 3);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `account`
+--
+ALTER TABLE `account`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `account_admin`
+--
+ALTER TABLE `account_admin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `customer`
@@ -160,26 +228,38 @@ ALTER TABLE `products`
 --
 
 --
+-- AUTO_INCREMENT for table `account`
+--
+ALTER TABLE `account`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `order_t`
 --
 ALTER TABLE `order_t`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `account`
+--
+ALTER TABLE `account`
+  ADD CONSTRAINT `accountfk` FOREIGN KEY (`id`) REFERENCES `customer` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `order_t`
