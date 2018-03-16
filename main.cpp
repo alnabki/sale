@@ -7,14 +7,11 @@
 #include<string>
 #include<list>
 using namespace std;
-class login {
+class account {
+  public:
+  string id;
   string  username;
   string  password;
-  login (){
-   cout <<"enter you name and password" <<endl;
-   cout <<" name=\t"<<username<<endl;
-   cout <<" password=\t "<<endl;
-  }
 };
 class customer {
 public :
@@ -165,6 +162,61 @@ customer cust_selectbyname(string name){
         }
 
         return cust;
+}
+account account_select(string name){
+account acc;
+       string query = "select * from  account where username='"+name+"'";
+       const char* q = query.c_str();
+       qstate = mysql_query(conn,q);
+
+       if(!qstate)
+        {
+           res = mysql_store_result(conn);
+            while(row=mysql_fetch_row(res))
+            {
+              acc.id = row[0];
+               acc.username = row[1];
+               acc.password = row[2];
+            }
+        }
+       else
+        {
+            cout<<"query error: "<<mysql_error(conn)<<endl;
+        }
+        return acc;
+}
+account account_search (string password){
+account acc;
+       string query = "select * from  account where password='"+password+"'";
+       const char* q = query.c_str();
+       qstate = mysql_query(conn,q);
+
+       if(!qstate)
+        {
+           res = mysql_store_result(conn);
+            while(row=mysql_fetch_row(res))
+            {
+              acc.id=row[0];
+              acc.username = row[1];
+               acc.password = row[2];
+            }
+        }
+       else
+        {
+            cout<<"query error: "<<mysql_error(conn)<<endl;
+        }
+
+        return acc;
+}
+void account_insert(account acc){
+    string query = "INSERT INTO `account`( username, password) VALUES ('"+acc.username+"','"+acc.password+"')";
+       const char* q = query.c_str();
+       qstate = mysql_query(conn,q);
+    if(!qstate)
+            cout<<"record inserted successfully..."<<endl;
+    else
+            cout<<"query problem: "<<mysql_error(conn)<<endl;
+
 }
 void prod_insert(product pro ){
 
@@ -432,20 +484,70 @@ void show_sale_byname(string name){
                  cout <<"all your purchases =\t"<<sum<<endl;
                  cout <<"*******************************************************************************"<<endl;
 }
-bool verification(login){
+bool verification(string name){
+    account acc;
+    string password;
+    DB_connection db;
+    bool login=false;
+    cout<<"***************************************"<<endl;
+    cout<<"enter your name=\t";
+    cin>>name;
+    acc=db.account_select(name);
+
+    if(!acc.id.empty()){
+        cout <<" password=\t ";
+         cin>>password;
+         cout<<"***************************************"<<endl;
+         acc = db.account_search(password);
+          if (!acc.id.empty()){
+              login=true;
+          }
+          else
+          {
+            cout <<"your password not correct write password again "<<endl;
+            cout <<"***********************************************"<<endl;
+                    login=false;
+          }
+    }
+       else {
+            cout<<"******************************************"<<endl;
+            cout<<"you don't have an account in the DataBase "<<endl;
+            cout<<"******************************************"<<endl;
+            cout<<"add your account"<<endl;
+            cout <<"enter you name and password\t"<<endl ;
+            cout <<" name=\t";
+            cin>>acc.username;
+            cout <<" password=\t ";
+            cin>>acc.password;
+            cout<<"*****************************************"<<endl;
+            db.account_insert(acc );
+            login=true;
+    }
+
+
+  return login;
+
 }
 int main(){
+string name;
+bool login=true;;
+//cout <<"enter you name\t";
+//cin >>name;
+verification(name);
+if (login==true){
 
     product pro;
     order_t ord;
+    account acc;
     DB_connection db;
     bool j = false;
-    string idd,id;
+    string name,idd,id;
    int menu_choice, menu_choice_admin,menu_ch,t;
     char y;
     customer cust;
     string  postFix="-1";
     bool goback=false;
+
        do{
            printgeneralmenu();
            cout << "Enter a menu choice: ";
@@ -602,6 +704,7 @@ int main(){
          system("cls") ;
      }
          } while (goback=true);
+         }
 
       return 0;
       }
