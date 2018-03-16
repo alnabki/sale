@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1521199399 source:c:\sale_products\main.cpp
+	<iostream>
+	<windows.h>
+	<mysql.h>
+	<stdlib.h>
+	<iomanip>
+	<sstream>
+	<string>
+	<list>
+
+1476109533 c:\sale_products\include\mysql.h
+	<sys/types.h>
+	<winsock.h>
+	"mysql_com.h"
+	"mysql_time.h"
+	"mysql_version.h"
+	"typelib.h"
+	"my_list.h"
+	"my_alloc.h"
+
+1476109546 c:\sale_products\include\mysql_com.h
+
+1476109572 c:\sale_products\include\mysql_time.h
+
+1476109583 c:\sale_products\include\mysql_version.h
+	<custom_conf.h>
+
+1476109723 c:\sale_products\include\typelib.h
+
+1476109768 c:\sale_products\include\my_list.h
+
+1476109777 c:\sale_products\include\my_alloc.h
+
