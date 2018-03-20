@@ -525,10 +525,10 @@ account verification(string name){
             cout<<"add your account"<<endl;
             cout <<"enter you name and password\t"<<endl ;
             cout <<" name=\t";
-            cin>>acc.username;
+            cin>>cust.name;
+            acc.username=cust.name;
             cout <<" password=\t ";
             cin>>acc.password;
-            cust.name=name;
             cout<<"enter the age=\t";
             cin>>cust.age;
             cout<<"enter the phone=\t";
@@ -537,6 +537,7 @@ account verification(string name){
             db.cust_insert(cust);
             db.account_insert(acc );
             cust=db.cust_selectbyname(name);
+            acc.username=cust.name;
             cust.show(cust);
             acc.login=true;
 
@@ -544,25 +545,24 @@ account verification(string name){
   return acc;
 }
 int main(){
-string name;
-    product pro;
-    order_t ord;
-    account acc;
-    customer cust;
-    DB_connection db;
-    bool j = false;
-    string id;
-   int menu_choice, menu_choice_admin,menu_ch,t;
-    //char y;
-    string  postFix="-1";
-    bool goback=false;
-       do{
-           printgeneralmenu();
-           cout << "Enter a menu choice: ";
-           cin >> menu_choice;
+  string name;
+  product pro;
+  order_t ord;
+  account acc;
+  customer cust;
+  DB_connection db;
+  bool j = false;
+  string id;
+  int menu_choice, menu_choice_admin,menu_ch,t;
+  string  postFix="-1";
+  bool goback=false;
+      do{
+            printgeneralmenu();
+            cout << "Enter a menu choice: ";
+            cin >> menu_choice;
 
             switch(menu_choice){
-             case 1:{// for admin:
+              case 1:{// for admin:
                   admin_printmenu();
                   cout << "Enter a menu choice: ";
                   cin >> menu_choice_admin;
@@ -620,7 +620,7 @@ string name;
                     }
            break;
             }
-             case 2:{//  for customer
+              case 2:{//  for customer
                 string name;
                 acc =verification(name);
                 if (acc.login==true){
@@ -690,20 +690,17 @@ string name;
                     }while (goback1=true);
                }
              }
-             default :{
+              default :{
                        cout << "You have entered an invalid menu choice.\n"<<endl;
                        cout  << "Please try again.\n\n";
-
-             break;
-             }
-           }
-         backtomenu : {
+               break;
+              }
+            }
+            backtomenu : {
          goback=true;
          system("cls") ;
          }
-         } while (goback=true);
-
-
+       } while (goback=true);
       return 0;
       }
 
