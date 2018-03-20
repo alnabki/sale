@@ -12,6 +12,9 @@ class account {
   string id;
   string  username;
   string  password;
+  string customer_ID;
+  bool login;
+
 };
 class customer {
 public :
@@ -484,33 +487,38 @@ void show_sale_byname(string name){
                  cout <<"all your purchases =\t"<<sum<<endl;
                  cout <<"*******************************************************************************"<<endl;
 }
-bool verification(string name){
+account verification(string name){
     account acc;
     customer cust;
     string password;
     DB_connection db;
-    bool login=false;
+    acc.login=false;
     cout<<"***************************************"<<endl;
     cout<<"enter your name=\t";
     cin>>name;
     acc=db.account_select(name);
-
     if(!acc.id.empty()){
         cout <<" password=\t ";
          cin>>password;
          cout<<"***************************************"<<endl;
          acc = db.account_search(password);
           if (!acc.id.empty()){
-              login=true;
+             cust= db.cust_selectbyname(name);
+             cust.show(cust);
+              acc.customer_ID=cust.ID;
+              acc.username=cust.name;
+              acc.login=true;
           }
           else
           {
             cout <<"your password not correct write password again "<<endl;
             cout <<"***********************************************"<<endl;
-                    login=false;
+                    acc.login=false;
+                     cin.get();
+                     cin.ignore();
           }
     }
-       else {
+    else {
             cout<<"******************************************"<<endl;
             cout<<"you don't have an account in the DataBase "<<endl;
             cout<<"******************************************"<<endl;
@@ -520,48 +528,41 @@ bool verification(string name){
             cin>>acc.username;
             cout <<" password=\t ";
             cin>>acc.password;
-            cout<<"*****************************************"<<endl;
             cust.name=name;
-           // cust.add(cust);
             cout<<"enter the age=\t";
             cin>>cust.age;
             cout<<"enter the phone=\t";
             cin>>cust.phone;
+            cout<<"*****************************************"<<endl;
             db.cust_insert(cust);
             db.account_insert(acc );
             cust=db.cust_selectbyname(name);
-            login=true;
+            cust.show(cust);
+            acc.login=true;
+
     }
-
-
-  return login;
-
+  return acc;
 }
 int main(){
 string name;
-bool login=true;;
-//verification(name);
-//if (login==true){
-
     product pro;
     order_t ord;
     account acc;
+    customer cust;
     DB_connection db;
     bool j = false;
-    string idd,id;
+    string id;
    int menu_choice, menu_choice_admin,menu_ch,t;
-    char y;
-    customer cust;
+    //char y;
     string  postFix="-1";
     bool goback=false;
-
        do{
            printgeneralmenu();
            cout << "Enter a menu choice: ";
            cin >> menu_choice;
 
             switch(menu_choice){
-         case 1:{// for admin:
+             case 1:{// for admin:
                   admin_printmenu();
                   cout << "Enter a menu choice: ";
                   cin >> menu_choice_admin;
@@ -619,24 +620,11 @@ bool login=true;;
                     }
            break;
             }
-         case 2:{//  for customer
+             case 2:{//  for customer
                 string name;
-                 verification(name);
-                if (login==true){
-                 //string name;
-                 //cout<< "enter your name ";
-                // cin>> name;
-                 //cust=db.cust_selectbyname(name);
-                // if (login==true){
-                  //    goto efter_case1;
-                // }
-                 //else{
-
-                 //    goto efter_case1;
-                 //}
-               // efter_case1:{
-                        bool goback1=false;
-                         cust.show(cust);
+                acc =verification(name);
+                if (acc.login==true){
+                    bool goback1=false;
                     do{
                          print_status_product_menu();
                          cout<<"enter your choice=";
@@ -665,7 +653,9 @@ bool login=true;;
                                                          pro.quantity =s;
                                                          db.prod_update(pro);
                                                          ord.prod_ID= pro.ID;
-                                                         ord.cust_ID=cust.ID;
+                                                         ord.cust_ID=acc.customer_ID;
+                                                         cout<< ord.prod_ID<<endl;
+                                                         cout<< ord.cust_ID<<endl;
                                                          db.ord_insert(ord);
                                                          }
                                                 break;
@@ -684,7 +674,7 @@ bool login=true;;
                                  break;
                                 }
                              case 2:{//show his bought products each with price and at the end total price
-                                show_sale_byname(name);
+                                show_sale_byname(acc.username);
                               break;
                               }
                              case 3:{//back
@@ -697,21 +687,20 @@ bool login=true;;
                              break;
                              }
                              }
-                        }while (goback1=true);
-               // }
-         }
-         }
-         default :{
-                cout << "You have entered an invalid menu choice.\n"<<endl;
-                cout  << "Please try again.\n\n";
-
-            break;
+                    }while (goback1=true);
+               }
              }
-          }
-          backtomenu : {
+             default :{
+                       cout << "You have entered an invalid menu choice.\n"<<endl;
+                       cout  << "Please try again.\n\n";
+
+             break;
+             }
+           }
+         backtomenu : {
          goback=true;
          system("cls") ;
-     }
+         }
          } while (goback=true);
 
 
