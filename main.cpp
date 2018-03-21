@@ -30,11 +30,12 @@ void add(customer){
        cin>>phone;
             }
  void show(customer ){
-
-    cout <<"*****************************Your detils*******************************************"<<endl;
-    cout <<setw(20)<<"customer_ID"<<setw(20)<<"name"<<setw(20)<<"age"<<setw(20)<<"phone"<<endl;
-    cout <<setw(20)<<ID<<setw(20)<<name<<setw(20)<<age<<setw(20)<<phone<<endl;
-    cout <<"***********************************************************************************"<<endl;
+    cout <<" ___________________________________________________________________________________"<<endl;
+    cout <<"|                             Your detils                                           |"<<endl;
+    cout <<"|___________________________________________________________________________________|"<<endl;
+    cout <<"|"<<setw(20)<<"customer_ID"<<setw(20)<<"name"<<setw(20)<<"age"<<setw(20)<<"phone"<<"   |"<<endl;
+    cout <<"|"<<setw(20)<<ID<<setw(20)<<name<<setw(20)<<age<<setw(20)<<phone<<"   |"<<endl;
+    cout <<"|___________________________________________________________________________________|"<<endl;
 }
 };
 class product {
@@ -44,11 +45,12 @@ string product_name;
 string price;
 string quantity;
 void show(product ){
-
-    cout <<"*******************************Product's details*******************************"<<endl;
-    cout <<setw(20)<<"poduct_ID"<<setw(20)<<"product_name"<<setw(20)<<"price"<<setw(20)<<"quantity"<<endl;
-    cout <<setw(20)<<ID<<setw(20)<<product_name<<setw(20)<<price<<setw(20)<<quantity<<endl;
-    cout <<"*****************************************************************************"<<endl;
+    cout <<" __________________________________________________________________________________"<<endl;
+    cout <<"|                              _Product's details                                  |"<<endl;
+    cout <<"|__________________________________________________________________________________|"<<endl;
+    cout <<"|"<<setw(20)<<"poduct_ID"<<setw(20)<<"product_name"<<setw(20)<<"price"<<setw(20)<<"quantity"<<"  |"<<endl;
+    cout <<setw(20)<<ID<<setw(20)<<product_name<<setw(20)<<price<<setw(20)<<quantity<<"   |"<<endl;
+    cout <<"|__________________________________________________________________________________|"<<endl;
 }
 };
 class order_t {
@@ -254,19 +256,13 @@ void ord_insert(order_t ord){
 
 }
 void prod_update(product pro){
-
-
                 string q3 = "update  products set product_name='"+pro.product_name+"',price="+pro.price+",quantity="+pro.quantity+" where ID ="+pro.ID;
                 const char* q4 = q3.c_str();
-                cout <<q4<<endl;
-
                 qstate = mysql_query(conn,q4);
-
                 if(!qstate)
                         cout<<"record updated successfully..."<<endl;
                 else
                         cout<<"query problem: "<<mysql_error(conn)<<endl;
-
      }
 void prod_delete(string id){
 
@@ -386,38 +382,45 @@ list<order_t> sales;
 }
 };
 void admin_printmenu(){
-
-    cout <<"1 - enter the  product and show all products at same time"<<endl;
-	cout <<"2 - delete product"<<endl;
-	cout <<"3 - show total sale for each product by given id"<<endl;
-	cout <<"4 - show total sale"<<endl;
-	cout <<"5 - back"<<endl;
+    cout <<" ____________________________________________________________"<<endl;
+    cout <<"|  1 - enter the  product and show all products at same time |"<<endl;
+	cout <<"|  2 - delete product                                        |"<<endl;
+	cout <<"|  3 - show total sale for each product by given id          |"<<endl;
+	cout <<"|  4 - show total sale                                       |"<<endl;
+	cout <<"|  5 - back                                                  |"<<endl;
+	cout <<"|____________________________________________________________|"<<endl;
 }
 void buy_prod_menu_print(){
-   cout<<"**************Sale Menu****************"<<endl;
-   cout<<"1 - buy a product "<<endl;
-   cout<<"2 - back"<<endl;
-   cout<<"***************************************"<<endl;
+   cout <<"______________________________"<<endl;
+   cout<<"|             Sale Menu        |"<<endl;
+   cout<<"|______________________________|"<<endl;
+   cout<<"|  1 - buy a product           |"<<endl;
+   cout<<"|  2 - back                    |"<<endl;
+   cout<<"|______________________________|"<<endl;
 }
 void cust_printmenu(){
+    cout<<" ________________________________"<<endl;
+    cout<<"|    1-enter your name           |"<<endl;
+    cout<<"|    2-enter your age            |"<<endl;
+    cout<<"|    3-enter your phone          |"<<endl;
+    cout<<"|________________________________|"<<endl;
 
-    cout<<"1-enter your name"<<endl;
-    cout<<"2-enter your age"<<endl;
-    cout<<"3-enter your phone"<<endl;
 }
 void printgeneralmenu(){
+     cout<<" ___________________________ "<<endl;
+     cout<<"|       general menu        |"<<endl;
+     cout<<"|___________________________|"<<endl;
+     cout<<"|  1-admin                  |"<<endl;
+     cout<<"|  2-customer               |"<<endl;
+     cout<<"|___________________________|"<<endl;
 
-     cout<<"************general menu*************"<<endl;
-     cout<<"1-admin"<<endl;
-     cout<<"2-customer"<<endl;
-     cout<<"*************************************"<<endl;
 }
 void print_status_product_menu(){
-    cout<<"-----------------------------------------------------------------------"<<endl;
-    cout<<"1 - show products and next menu"<<endl;
-    cout<<"2 - show his bought products each with price and at the end total price"<<endl;
-    cout<<"3 - back"<<endl;
-    cout<<"-----------------------------------------------------------------------"<<endl;
+    cout<<" _____________________________________________________________________________"<<endl;
+    cout<<"|   1 - show products and next menu                                           |"<<endl;
+    cout<<"|   2 - show his bought products each with price and at the end total price   |"<<endl;
+    cout<<"|   3 - back                                                                  |"<<endl;
+    cout<<"|_____________________________________________________________________________|"<<endl;
 }
 string NumberToString ( int Number ){
 
@@ -427,64 +430,73 @@ string NumberToString ( int Number ){
   }
 void show_product_list(){
     DB_connection db;
-cout <<"*******************************Product's details*******************************"<<endl;
-                          cout <<setw(20)<<"poduct_ID"<<setw(20)<<"product_name"<<setw(20)<<"price"<<setw(20)<<"quantity"<<endl;
+cout <<" ________________________________________________________________________________"<<endl;
+cout <<"|                               Product's details                                |"<<endl;
+cout <<"|________________________________________________________________________________|"<<endl;
+                          cout <<"|"<<setw(20)<<"poduct_ID"<<setw(20)<<"product_name"<<setw(20)<<"price"<<setw(20)<<"quantity"<<"|"<<endl;
                           list<product> products;
                           products=db.show_allproducts();
                             for ( pro : products){
-                             cout <<setw(20)<<pro.ID<<setw(20)<<pro.product_name<<setw(20)<<pro.price<<setw(20)<<pro.quantity<<endl;
+                             cout <<"|"<<setw(20)<<pro.ID<<setw(20)<<pro.product_name<<setw(20)<<pro.price<<setw(20)<<pro.quantity<<"|"<<endl;
                              }
+cout <<"|________________________________________________________________________________|"<<endl;
 }
 void show_sale_byid(string id){
     DB_connection db;
     order_t ord;
     int sum=0;
-                  cout <<"*******************************Product's details*******************************"<<endl;
-                  cout <<setw(20)<<"poduct_ID"<<setw(20)<<"product_name"<<setw(20)<<"customer_name"<<setw(20)<<"price"<< endl;
+                  cout <<" ________________________________________________________________________________"<<endl;
+                  cout <<"|                               Product's details                                |"<<endl;
+                  cout <<"|________________________________________________________________________________|"<<endl;
+                  cout <<"|"<<setw(20)<<"poduct_ID"<<setw(20)<<"product_name"<<setw(20)<<"customer_name"<<setw(20)<<"price"<<"|"<< endl;
                   list<order_t> sales;
                   sales=db.show_total_saleby_ID(id);
                   for ( ord : sales){
-                  cout <<setw(20)<<ord.ID<<setw(20)<<ord.product_name<<setw(20)<<ord.customer_name<<setw(20)<<ord.price<<endl;
+                  cout <<"|"<<setw(20)<<ord.ID<<setw(20)<<ord.product_name<<setw(20)<<ord.customer_name<<setw(20)<<ord.price<<"|"<<endl;
 
                    sum = sum + atoi(ord.price.c_str());
                  }
-                 cout <<"*******************************************************************************"<<endl;
-                 cout <<"the total sales of this items is =\t"<<sum<<endl;
-                 cout <<"*******************************************************************************"<<endl;
+                  cout <<"|________________________________________________________________________________|"<<endl;
+                  cout <<"|the total sales of this items is =\t"<<setw(20)<<sum<<setw(22)<<"|"<<endl;
+                  cout <<"|________________________________________________________________________________|"<<endl;
 }
 void show_sales(){
     DB_connection db;
     order_t ord;
     int sum=0;
-                  cout <<"*******************************Product's details*******************************"<<endl;
-                  cout <<setw(20)<<"poduct_ID"<<setw(20)<<"product_name"<<setw(20)<<"customer_name"<<setw(20)<<"price"<< endl;
+                  cout <<" ________________________________________________________________________________"<<endl;
+                  cout <<"|                               Product's details                                |"<<endl;
+                  cout <<"|________________________________________________________________________________|"<<endl;
+                  cout <<"|"<<setw(20)<<"poduct_ID"<<setw(20)<<"product_name"<<setw(20)<<"customer_name"<<setw(20)<<"price"<<"|"<< endl;
                   list<order_t> sales;
                   sales = db.total_sales();
                   for ( ord : sales){
-                  cout <<setw(20)<<ord.ID<<setw(20)<<ord.product_name<<setw(20)<<ord.customer_name<<setw(20)<<ord.price<<endl;
+                  cout <<"|"<<setw(20)<<ord.ID<<setw(20)<<ord.product_name<<setw(20)<<ord.customer_name<<setw(20)<<ord.price<<"|"<<endl;
 
                    sum = sum + atoi(ord.price.c_str());
                  }
-                 cout <<"*******************************************************************************"<<endl;
-                 cout <<"the total sales  is =\t"<<sum<<endl;
-                 cout <<"*******************************************************************************"<<endl;
+                  cout <<"|________________________________________________________________________________|"<<endl;
+                  cout <<"|   the total sales  is =\t "<<setw(20)<<sum<<setw(29)<<"|"<<endl;
+                  cout <<"|________________________________________________________________________________|"<<endl;
 }
 void show_sale_byname(string name){
     DB_connection db;
     order_t ord;
     int sum=0;
-                  cout <<"*******************************Product's details*******************************"<<endl;
-                  cout <<setw(20)<<"poduct_ID"<<setw(20)<<"product_name"<<setw(20)<<"customer_name"<<setw(20)<<"price"<< endl;
+                  cout <<" ________________________________________________________________________________"<<endl;
+                  cout <<"|                               Product's details                                |"<<endl;
+                  cout <<"|________________________________________________________________________________|"<<endl;
+                  cout <<"|"<<setw(20)<<"poduct_ID"<<setw(20)<<"product_name"<<setw(20)<<"customer_name"<<setw(20)<<"price"<<"|"<< endl;
                   list<order_t> sales;
                   sales= db.view_customer_purchese(name);
                   for ( ord : sales){
-                  cout <<setw(20)<<ord.ID<<setw(20)<<ord.product_name<<setw(20)<<ord.customer_name<<setw(20)<<ord.price<<endl;
+                  cout <<"|"<<setw(20)<<ord.ID<<setw(20)<<ord.product_name<<setw(20)<<ord.customer_name<<setw(20)<<ord.price<<"|"<<endl;
 
                    sum = sum + atoi(ord.price.c_str());
                  }
-                 cout <<"*******************************************************************************"<<endl;
-                 cout <<"all your purchases =\t"<<sum<<endl;
-                 cout <<"*******************************************************************************"<<endl;
+                  cout <<"|________________________________________________________________________________|"<<endl;
+                  cout <<"|    all your purchases =\t"<<setw(20)<<sum<<setw(30)<<"|"<<endl;
+                  cout <<"|________________________________________________________________________________|"<<endl;
 }
 account verification(string name){
     account acc;
@@ -492,14 +504,15 @@ account verification(string name){
     string password;
     DB_connection db;
     acc.login=false;
-    cout<<"***************************************"<<endl;
-    cout<<"enter your name=\t";
+    cout <<" ___________________________________________"<<endl;
+    cout <<"|enter your name=\t";
     cin>>name;
+    cout <<"|___________________________________________"<<endl;
     acc=db.account_select(name);
     if(!acc.id.empty()){
-        cout <<" password=\t ";
-         cin>>password;
-         cout<<"***************************************"<<endl;
+        cout <<"| password       =\t";
+        cin>>password;
+        cout <<"|_____________________________________"<<endl;
          acc = db.account_search(password);
           if (!acc.id.empty()){
              cust= db.cust_selectbyname(name);
@@ -509,32 +522,37 @@ account verification(string name){
               acc.login=true;
           }
           else{
-            cout <<"your password not correct write password again "<<endl;
-            cout <<"***********************************************"<<endl;
+            cout <<" _____________________________________________"<<endl;
+            cout <<"|our password not correct write password again|"<<endl;
+            cout <<"|_____________________________________________|"<<endl;
                     acc.login=false;
                      cin.get();
                      cin.ignore();
           }
     }
     else {
-            cout<<"******************************************"<<endl;
-            cout<<"you don't have an account in the DataBase "<<endl;
-            cout<<"******************************************"<<endl;
-            cout<<"add your account"<<endl;
-            cout <<"enter you name and password\t"<<endl ;
-            cout <<" name=\t";
+            cout<<"|******************************************|"<<endl;
+            cout<<"|you don't have an account in the DataBase | "<<endl;
+            cout<<"|******************************************|"<<endl;
+            cout<<"|add your account                          |"<<endl;
+            cout<<"|__________________________________________|"<<endl;
+            cout<<"|enter you name and password\t             "<<endl ;
+            cout<<"| name=\t";
             cin>>cust.name;
             acc.username=cust.name;
-            cout <<" password=\t ";
+            cout<<"|__________________________________________ "<<endl;
+            cout<<"| password=\t ";
             cin>>acc.password;
-            cout<<"enter the age=\t";
+            cout<<"|__________________________________________"<<endl;
+            cout<<"| enter the age=\t";
             cin>>cust.age;
-            cout<<"enter the phone=\t";
+            cout<<"|__________________________________________"<<endl;
+            cout<<"| enter the phone=\t";
             cin>>cust.phone;
-            cout<<"*****************************************"<<endl;
+            cout<<"|__________________________________________"<<endl;
             db.cust_insert(cust);
             db.account_insert(acc );
-            cust=db.cust_selectbyname(name);
+            cust=db.cust_selectbyname(cust.name);
             acc.customer_ID=cust.ID;
             cust.show(cust);
             acc.login=true;
@@ -577,7 +595,6 @@ int main(){
                           cin>>pro.quantity;
                           db.prod_insert(pro);
                           show_product_list();
-                          cout <<"*******************************************************************************"<<endl;
                           cin.get();
                           cin.ignore();
 
