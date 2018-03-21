@@ -122,8 +122,7 @@ customer cust;
        const char* q = query.c_str();
        qstate = mysql_query(conn,q);
 
-       if(!qstate)
-        {
+       if(!qstate){
            res = mysql_store_result(conn);
             while(row=mysql_fetch_row(res))
             {
@@ -264,7 +263,7 @@ void prod_update(product pro){
                 qstate = mysql_query(conn,q4);
 
                 if(!qstate)
-                        cout<<"record inserted successfully..."<<endl;
+                        cout<<"record updated successfully..."<<endl;
                 else
                         cout<<"query problem: "<<mysql_error(conn)<<endl;
 
@@ -278,7 +277,7 @@ void prod_delete(string id){
                 qstate = mysql_query(conn,q4);
 
                 if(!qstate)
-                        cout<<"record inserted successfully..."<<endl;
+                        cout<<"record deleted successfully..."<<endl;
                 else
                         cout<<"query problem: "<<mysql_error(conn)<<endl;
 }
@@ -509,8 +508,7 @@ account verification(string name){
               acc.username=cust.name;
               acc.login=true;
           }
-          else
-          {
+          else{
             cout <<"your password not correct write password again "<<endl;
             cout <<"***********************************************"<<endl;
                     acc.login=false;
@@ -653,8 +651,6 @@ int main(){
                                                          db.prod_update(pro);
                                                          ord.prod_ID= pro.ID;
                                                          ord.cust_ID=acc.customer_ID;
-                                                         cout<< ord.prod_ID<<endl;
-                                                         cout<< ord.cust_ID<<endl;
                                                          db.ord_insert(ord);
                                                          }
                                                 break;
@@ -688,7 +684,7 @@ int main(){
                              }
                     }while (goback1=true);
                }
-             }
+              }
               default :{
                        cout << "You have entered an invalid menu choice.\n"<<endl;
                        cout  << "Please try again.\n\n";
