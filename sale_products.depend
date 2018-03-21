@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1521560273 source:c:\sale_products\main.cpp
+1521620342 source:c:\sale_products\main.cpp
 	<iostream>
 	<windows.h>
 	<mysql.h>

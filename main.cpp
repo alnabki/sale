@@ -537,10 +537,9 @@ account verification(string name){
             db.cust_insert(cust);
             db.account_insert(acc );
             cust=db.cust_selectbyname(name);
-            acc.username=cust.name;
+            acc.customer_ID=cust.ID;
             cust.show(cust);
             acc.login=true;
-
     }
   return acc;
 }
