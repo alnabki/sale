@@ -542,6 +542,7 @@ account verification(string name){
   return acc;
 }
 int main(){
+
     cout <<" ********************Hello in my company ************************"<<endl;
   string name;
   product pro;
