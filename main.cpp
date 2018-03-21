@@ -542,8 +542,9 @@ account verification(string name){
   return acc;
 }
 int main(){
-
-    cout <<" ********************Hello in my company ************************"<<endl;
+    cout <<"-----------------------------------------------------------------"<<endl;
+    cout <<"                      Hello in my company                        "<<endl;
+    cout <<"-----------------------------------------------------------------"<<endl;
   string name;
   product pro;
   order_t ord;
