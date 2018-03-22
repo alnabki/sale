@@ -213,7 +213,7 @@ account acc;
         return acc;
 }
 void account_insert(account acc){
-    string query = "INSERT INTO `account`( username, password) VALUES ('"+acc.username+"','"+acc.password+"')";
+    string query = "INSERT INTO `account`( username, password,cust_id) VALUES ('"+acc.username+"','"+acc.password+"','"+acc.customer_ID+"')";
        const char* q = query.c_str();
        qstate = mysql_query(conn,q);
     if(!qstate)
@@ -330,7 +330,7 @@ list<order_t> show_total_saleby_ID(string id){
 }
 list<order_t> total_sales(){
      list<order_t> sales;
-       string query =  "select products.ID,product_name,name ,price from order_t RIGHT join customer on order_t.cust_ID=customer.ID INNER join products on products.ID = order_t.prod_ID";
+       string query =  "select products.ID,product_name,name ,price from order_t inner join customer on order_t.cust_ID=customer.ID INNER join products on products.ID = order_t.prod_ID";
        const char* q = query.c_str();
        qstate = mysql_query(conn,q);
        if(!qstate)
@@ -551,9 +551,9 @@ account verification(string name){
             cin>>cust.phone;
             cout<<"|__________________________________________"<<endl;
             db.cust_insert(cust);
-            db.account_insert(acc );
             cust=db.cust_selectbyname(cust.name);
             acc.customer_ID=cust.ID;
+            db.account_insert(acc );
             cust.show(cust);
             acc.login=true;
     }

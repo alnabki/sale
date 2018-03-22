@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2018 at 05:10 PM
+-- Generation Time: Mar 22, 2018 at 10:55 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -31,28 +31,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `account` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `password` varchar(50) NOT NULL,
+  `cust_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `account`
 --
 
-INSERT INTO `account` (`id`, `username`, `password`) VALUES
-(1, 'mohamad', '123'),
-(2, '', ''),
-(3, '', ''),
-(4, '', ''),
-(5, '', ''),
-(6, 'rola', '123'),
-(7, 'tamer', '1234'),
-(8, 'jasmin', '123'),
-(9, 'mazen', '123'),
-(10, 'taher', '1234'),
-(11, 'maher', '123'),
-(12, 'maggi', '123'),
-(13, 'jasss', '123'),
-(14, 'nnn', '22');
+INSERT INTO `account` (`id`, `username`, `password`, `cust_id`) VALUES
+(43, 'mohamad', '123', 59),
+(44, 'maryam', '123', 60);
 
 -- --------------------------------------------------------
 
@@ -84,36 +73,8 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`ID`, `name`, `age`, `phone`) VALUES
-(1, 'mohamad', 45, 721251234),
-(2, 'yasser', 43, 734554321),
-(3, 'gabriel', 26, 2147483647),
-(4, 'ttt', 33, 54322333),
-(5, 'gggg', 22, 322222),
-(6, 'tttt', 44, 667654),
-(7, 'maha', 33, 22221223),
-(8, 'jjj', 99, 2147483647),
-(9, 'yyyppp', 66, 98675764),
-(10, 'yyyy', 44, 67584653),
-(11, 'mjjji', 99, 87675876),
-(12, 'uguygyu', 666, 788756),
-(13, 'ggg', 444, 56474654),
-(14, 'hgchgc', 65, 5555),
-(15, 'jhbhj', 6666, 765746534),
-(16, 'hvjh', 776, 87766),
-(17, 'wrfwe', 123, 21323),
-(18, 'gyftyftrhg', 4444, 76545),
-(19, 'tftrdtr', 555, 88),
-(20, 'mazen', 30, 765656),
-(21, 'wewre', 33, 2222),
-(22, 'qewfwe', 22, 444),
-(23, 'yasen', 22, 1112223),
-(24, '2', 0, 2222),
-(25, 'ayman', 45, 777),
-(26, 'taher', 22, 223333333),
-(27, 'maher', 22, 3444),
-(28, 'maggi', 23, 22222222),
-(29, 'jasss', 12, 111111),
-(30, 'nnn', 12, 11111);
+(59, 'mohamad', 45, 2147483647),
+(60, 'maryam', 35, 721242343);
 
 -- --------------------------------------------------------
 
@@ -132,16 +93,10 @@ CREATE TABLE `order_t` (
 --
 
 INSERT INTO `order_t` (`ID`, `cust_ID`, `prod_ID`) VALUES
-(2, 1, 2),
-(4, 7, 3),
-(5, 20, 7),
-(6, 25, 9),
-(7, 3, 10),
-(8, 3, 10),
-(9, 3, 5),
-(10, 1, 2),
-(12, 1, 11),
-(13, 20, 3);
+(63, 59, 35),
+(64, 59, 36),
+(65, 60, 35),
+(66, 60, 39);
 
 -- --------------------------------------------------------
 
@@ -161,31 +116,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`ID`, `product_name`, `price`, `quantity`) VALUES
-(1, '', 0, 0),
-(2, 'camera', 344, 28),
-(3, 'car', 230000, 3),
-(5, 'laptop', 2000, 1),
-(7, 'test', 88, 0),
-(8, 'test2', 22, 333),
-(9, 'qq', 22, 1),
-(10, 'cow', 10000, 8),
-(11, 'car', 1222, 2),
-(12, 'www', 0, 0),
-(13, 'rrr', 333, 3),
-(14, 'efd', 0, 0),
-(15, 'dddd', 23, 22),
-(16, 'eee', 33, 2),
-(17, 'yyy', 55, 88),
-(18, 'uuu', 77, 88),
-(19, 'uuu', 676, 99),
-(20, 'trtr', 555, 33),
-(21, 'vaat', 22, 44),
-(22, 'ee', 22, 3),
-(23, 'camera', 9998, 55),
-(24, 'tre', 88, 9),
-(25, 'rrr', 23, 44),
-(26, 'yashhh', 55, 9),
-(27, 'eee', 22, 3);
+(35, 'mobile', 4500, 27),
+(36, 'car', 120000, 2),
+(37, 'headphone', 60, 45),
+(38, 'book', 130, 130),
+(39, 'adapter', 150, 28);
 
 --
 -- Indexes for dumped tables
@@ -195,7 +130,8 @@ INSERT INTO `products` (`ID`, `product_name`, `price`, `quantity`) VALUES
 -- Indexes for table `account`
 --
 ALTER TABLE `account`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `accountfk` (`cust_id`);
 
 --
 -- Indexes for table `account_admin`
@@ -231,25 +167,25 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `order_t`
 --
 ALTER TABLE `order_t`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Constraints for dumped tables
@@ -259,7 +195,7 @@ ALTER TABLE `products`
 -- Constraints for table `account`
 --
 ALTER TABLE `account`
-  ADD CONSTRAINT `accountfk` FOREIGN KEY (`id`) REFERENCES `customer` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `accountfk` FOREIGN KEY (`cust_id`) REFERENCES `customer` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `order_t`
